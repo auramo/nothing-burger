@@ -32,7 +32,7 @@ app.use('/img/', express.static(`${__dirname}/../web-resources/img`))
 app.use('/css/', express.static(`${__dirname}/../web-resources/css`))
 app.use(bodyParser.json({limit: '5000kb'}))
 
-
-app.listen(process.env.PORT, () => {
-  console.log('server listening on port ', process.env.PORT)
+const httpServerPort = process.env.PORT || '8080'
+app.listen(httpServerPort, () => {
+  console.log('server listening on port', httpServerPort)
 })
