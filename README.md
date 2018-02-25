@@ -50,6 +50,53 @@ it's running with:
 
 ```docker ps```
 
+### Create Google Login client ID and secret key
+
+To use Google login for your application, you will have to create a project in
+[Google Cloud Console](https://console.cloud.google.com) (log in with your gmail address).
+
+Just give the project any name you want, then choose Credentials -> Create credentials -> Oauth Client ID
+Choose this type of the application: "Web application", and give it a name again.
+
+Now the important part, enter this to Authorized JavaScript origins:
+
+`http://localhost:8080`
+
+And this to Authorized redirect URIs:
+
+`http://localhost:8080/auth/google/callback`
+
+You can later add the real URI of your application to the above configuration options here 
+when it's running on a "real" server accessible from anywhere.
+
+After these steps, you get a _client ID_ and _client secret_. Configure these two in the 
+ `.env` file:
+
+``` 
+GOOGLE_CLIENT_ID=<The client ID you got>
+GOOGLE_CLIENT_SECRET=<The client secret you got>
+```
+
+You'll also have to enable Google+ API for the project. Navigate to Google+ API in the menu or 
+Go to this address: 
+`https://console.developers.google.com/apis/api/plus.googleapis.com/overview?project=<YOUR PROJECT NAME>`
+
+And click the enable Google+ API -button.
+
+### Add a user to the database
+
+In order to log in to your system, it has to know about you. Add a desired user by logging into PostgreSQL:
+
+```
+psql -d nothing-burger -h localhost -U nb -p 5432
+```
+
+And inserting the desired user:
+
+```
+INSERT INTO user_account (login, name) VALUES ('some.real.google.account@gmail.com', 'John Doe')
+```
+
 ### Run the server
 
 Run command `yarn watch` and wait until you see database initialization messages, webpack build
