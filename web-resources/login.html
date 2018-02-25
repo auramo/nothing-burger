@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in</title>
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+</head>
+<body>
+<div id="login-failed-indicator" style="margin: 30px 0 0 30px; display: none;" class="label label-error">Login failed</div>
+<div style="margin: 30px;" id="loginControl"></div>
+<script type="text/javascript">
+  var pathAndQuery = window.location.pathname + window.location.search
+  var desiredUrlAfterLogin = ''
+  if (location.search.indexOf('failed=true') !== -1) {
+    document.getElementById('login-failed-indicator').style.display = "inline-block"
+  } else {
+    desiredUrlAfterLogin = pathAndQuery.substr('/login'.length)
+  }
+  var loginLink = '<a class="btn btn-primary" href="/auth/googlelogin' + desiredUrlAfterLogin + '" class="btn">Log in via Google</a>'
+  document.getElementById('loginControl').innerHTML += loginLink
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+{
+  "license": "MIT",
+  "name": "bowman",
+  "engines": {
+    "node": ">=8.9.4",
+    "yarn": ">=1.3.2"
+  },
+  "scripts": {
+    "build": "webpack -p --config webpack.config.js",
+    "build:watch": "webpack --config webpack.config.js --watch",
+    "clean": "rm -rf dist/",
+    "start": "node server/server.js",
+    "postinstall": "webpack --config webpack.config.js",
+    "watch": "yarn build:watch & yarn watch:server",
+    "watch:server": "NODE_ENV=development nodemon -e js --watch server server/server.js",
+    "create-migration": "./server/migration/create-migration.sh",
+    "test": "mocha-webpack --webpack-config webpack.config-test.js -R spec test/unit"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "chai": "^4.1.2",
+    "css-loader": "^0.28.9",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-webpack-plugin": "^2.30.1",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "mocha": "^5.0.0",
+    "nodemon": "^1.14.11",
+    "style-loader": "^0.19.1",
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "assert": "^1.4.1",
+    "axios": "^0.17.1",
+    "body-parser": "^1.17.2",
+    "camelize": "^1.0.0",
+    "compression": "^1.7.1",
+    "connect-pg-simple": "^4.2.1",
+    "cookie-parser": "^1.4.3",
+    "db-migrate": "^0.10.2",
+    "db-migrate-pg": "^0.2.5",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "mocha-webpack": "^1.0.1",
+    "partial.lenses": "^13.1.1",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^1.0.0",
+    "pg": "^7.4.1",
+    "pg-promise": "^7.4.1",
+    "ramda": "^0.25.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "route-parser": "^0.0.5",
+    "uuid": "^3.2.1",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ],
+    "plugins": [
+      "babel-plugin-transform-object-rest-spread"
+    ]
+  }
+}
