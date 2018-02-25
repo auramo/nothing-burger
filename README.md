@@ -50,6 +50,10 @@ it's running with:
 
 ```docker ps```
 
+You will also need the PostgreSQL command-line client `psql`  which comes with the PostgreSQL
+download, or e.g. Homebrew package on Mac. The client [can also be run from the Docker container]
+(https://hub.docker.com/_/postgres/) but looks a bit more complicated than.
+
 ### Create Google Login client ID and secret key
 
 To use Google login for your application, you will have to create a project in
@@ -105,5 +109,6 @@ browser:
 
 `http://localhost:8080/`
 
-And the login screen should appear.
+And the login screen should appear. You should log in with the user you inserted into the database.
+
 
