@@ -3,7 +3,7 @@
 This is a template Node.js Web application application which has the following things configured and working
 out of the box:
 
-* Database (PostgreSQL) migrations which will be checked, and run if necessary every time 
+* Database (PostgreSQL) migrations which will be checked, and run if necessary every time
 the server starts
 * Google authentication and access control to resources which should not be public
 * Basic React build with webpack
@@ -13,7 +13,7 @@ the server starts
 
 ### Install Node
 
-[You can get Node.js here](https://nodejs.org/en/). 
+[You can get Node.js here](https://nodejs.org/en/).
 
 ### Install yarn
 
@@ -23,7 +23,7 @@ with `npm` as well, but hasn't been tested.
 
 ### Install and PostgreSQL
 
-[You can download it from here](https://www.postgresql.org/). I won't cover the 
+[You can download it from here](https://www.postgresql.org/). I won't cover the
 installation procedure here, but if you happen to run [Docker](https://www.docker.com/)
 on your computer, I'll guide you through a simpler way to get the DB running:
 
@@ -81,8 +81,8 @@ GOOGLE_CLIENT_ID=<The client ID you got>
 GOOGLE_CLIENT_SECRET=<The client secret you got>
 ```
 
-You'll also have to enable Google+ API for the project. Navigate to Google+ API in the menu or 
-Go to this address: 
+You'll also have to enable Google+ API for the project. Navigate to Google+ API in the menu or
+Go to this address:
 `https://console.developers.google.com/apis/api/plus.googleapis.com/overview?project=<YOUR PROJECT NAME>`
 
 And click the enable Google+ API -button.
@@ -103,8 +103,15 @@ INSERT INTO user_account (login, name) VALUES ('some.real.google.account@gmail.c
 
 ### Run the server
 
-Run command `yarn watch` and wait until you see database initialization messages, webpack build
-output and: `server listening on port 8080`. After those you can go to the following address in your 
+Run commands:
+
+```
+yarn install
+yarn watch
+```
+
+and wait until you see database initialization messages, webpack build
+output and: `server listening on port 8080`. After those you can go to the following address in your
 browser:
 
 `http://localhost:8080/`
