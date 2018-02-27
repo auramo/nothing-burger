@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './header'
-import {navigateTo} from './app/router'
+import {navigateTo} from './router'
 
 export default (params) => <div>
   <Header selectedTab="tab2"/>

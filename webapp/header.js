@@ -1,7 +1,7 @@
 import React from 'react'
 import * as R from 'ramda'
 import axios from 'axios'
-import {navigateTo} from './app/router'
+import {navigateTo} from './router'
 
 const tabs = {
   tab1: {label: 'View 1', location: '/view1'},

@@ -2,8 +2,8 @@ import * as R from 'ramda'
 import React from 'react'
 import Route from 'route-parser'
 
-import view1 from '../view1'
-import view2 from '../view2'
+import view1 from './view1'
+import view2 from './view2'
 
 const routeMappings = {
   '/': () => document.location = '/view1', //Go to the default view

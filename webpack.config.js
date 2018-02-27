@@ -32,7 +32,7 @@ const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
 const plugins = prodBuild ? [...alwaysInUseplugins, uglifyPlugin] : alwaysInUseplugins
 
 const webPackConfig = {
-  entry: './webapp/app/main.js',
+  entry: './webapp/main.js',
   output: {
     filename: jsBundleName,
     path: path.resolve(__dirname, 'dist'),
