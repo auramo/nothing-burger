@@ -1,6 +1,6 @@
 {
   "license": "MIT",
-  "name": "Nothing Burger",
+  "name": "nothing-burger",
   "engines": {
     "node": ">=8.9.4",
     "yarn": ">=1.3.2"
