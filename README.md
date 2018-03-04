@@ -119,3 +119,19 @@ browser:
 And the login screen should appear. You should log in with the user you inserted into the database.
 
 
+## Migrations
+
+Migrations are located under `server/migration/migrations`. They use [db-migrate](https://www.npmjs.com/package/db-migrate)
+library and are run on Node server startup. There are two existing migrations which create
+a table for user accounts and sessions. These both use plain SQL (the relevant part is in `sqls/XX-up.sql`). The `db-migrate` library
+allows the migrations to also be written in JavaScript, and although in the existing migrations we haven't used JavaScript code, the
+boilerplate is still created. 
+
+To create a new empty migration file, run:
+
+```
+yarn run create-migration
+``` 
+
+Note: the server watch should be shut down when a new migration is created, otherwise it runs the empty migration when it restarts
+and considers it executed. If this happens accidentally, just remove the row from `migrations` table.
