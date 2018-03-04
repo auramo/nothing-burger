@@ -124,8 +124,8 @@ And the login screen should appear. You should log in with the user you inserted
 Migrations are located under `server/migration/migrations`. They use [db-migrate](https://www.npmjs.com/package/db-migrate)
 library and are run on Node server startup. There are two existing migrations which create
 a table for user accounts and sessions. These both use plain SQL (the relevant part is in `sqls/XX-up.sql`). The `db-migrate` library
-allows the migrations to also be written in JavaScript, and although in the existing migrations we haven't used JavaScript code, the
-boilerplate is still created. 
+allows the migrations to also be written in JavaScript, and although the existing migrations are implemented with SQL, the
+JavaScript boilerplate is still there. 
 
 To create a new empty migration file, run:
 
@@ -135,3 +135,46 @@ yarn run create-migration
 
 Note: the server watch should be shut down when a new migration is created, otherwise it runs the empty migration when it restarts
 and considers it executed. If this happens accidentally, just remove the row from `migrations` table.
+
+## Google authentication
+
+Google login functionality is implemented with [Passport](http://www.passportjs.org/docs/). The glue code required to
+implement authentication and limit access to resources is in the modules under `server/auth`.
+
+## Client-side routing
+
+The routing uses [route-parser](https://github.com/rcs/route-parser) for defining the route paths and parameters. 
+The routes do not use hash (#). Instead, going to _view1_ with a parameter _x_ looks like this:
+
+```http://localhost:8080/view1/x```
+
+Avoiding hashes allows the server to see the route paths as well when they are first loaded. This means that if 
+you have not yet logged in, the server can redirect you back to `view1/x` after google authentication. The downside
+is that the server also has to know in a finer grained way which routes are for the client. That is why `server/server.js`
+has these rows:
+
+```
+const clientAppHtml = (req, res) => res.sendFile(path.resolve(`${__dirname}/../dist/index.html`))
+app.use('/view1*', clientAppHtml)
+app.use('/view2*', clientAppHtml)
+``` 
+
+You will have to define all "main client routes" like that on the server side _or_ you can skip the hassle 
+by prefixing all client routes with something like this:
+
+```
+app.use('/ui*', clientAppHtml)
+
+```
+
+The router avoids full page reloads by using [browser history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) 
+after the client-side web application is first loaded.
+
+The router code is in `webapp/router.js` and a few example routes are in `webapp/routes.js`. 
+
+## Styles
+
+The main page `web-resources/index.html` (and login page) includes styles from 
+[Spectre.css](https://picturepan2.github.io/spectre/getting-started.html)
+just because they are nicer than browser defaults. But they are not deeply coupled into this template application in 
+any way, you can just throw them away and define your own.
