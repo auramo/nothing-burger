@@ -1,6 +1,6 @@
 # Nothing Burger
 
-This is a template Node.js Web application application which has the following things configured and working
+This is a template Node.js Web application which has the following things configured and working
 out of the box:
 
 * Database (PostgreSQL) migrations which will be checked, and run if necessary every time
