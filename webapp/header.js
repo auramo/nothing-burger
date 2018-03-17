@@ -1,7 +1,7 @@
 import React from 'react'
 import * as R from 'ramda'
 import axios from 'axios'
-import {navigateTo} from './router'
+import {Link} from './router'
 
 const tabs = {
   tab1: {label: 'View 1', location: '/view1'},
@@ -25,16 +25,16 @@ export default class Header extends React.Component {
         {
           R.map(
             ([tab, {label, location}]) =>
-              <button
+              <Link
                 key={tab}
                 className="btn btn-link"
-                onClick={(evt) => navigateTo(location)}>
+                href={location}>
                 {
                   tab === this.props.selectedTab
                     ? <strong>{label}</strong>
                     : label
                 }
-              </button>,
+              </Link>,
             R.toPairs(tabs)
           )
         }
