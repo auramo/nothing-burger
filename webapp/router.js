@@ -2,12 +2,20 @@ import React from 'react'
 import * as R from 'ramda'
 
 const currentLocation = () => window.location.pathname + window.location.search
-let navigateToListener = null
 
 export const navigateTo = (location, title) => {
   history.pushState({}, title || '', location)
-  if (navigateToListener) navigateToListener(location)
+  const navigationEvent = document.createEvent('Event')
+  navigationEvent.initEvent('routerNavigateTo', false, false)
+  navigationEvent.location = location
+  window.dispatchEvent(navigationEvent)
 }
+
+export const Link = props =>
+  <a {...props}
+     onClick={evt => { evt.preventDefault(); navigateTo(props.href) }}>
+     {props.children}
+  </a>
 
 export class Router extends React.Component {
   constructor (props) {
@@ -18,7 +26,13 @@ export class Router extends React.Component {
     window.onpopstate = () => {
       this.setState({location: currentLocation()})
     }
-    navigateToListener = (location) => this.setState({location})
+    this.navigateToListener = ({location}) => {
+      this.setState({location})
+    }
+    window.addEventListener('routerNavigateTo', this.navigateToListener)
+  }
+  componentWillUnmount() {
+    window.removeEventListener(this.navigateToListener)
   }
   render() {
     const route = R.find(route => route.route.match(this.state.location))(this.props.routes)
